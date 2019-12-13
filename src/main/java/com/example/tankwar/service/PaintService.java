@@ -81,4 +81,36 @@ public class PaintService {
 
     }
 
+    /**
+     * 画出爆炸
+     *
+     * @param g     Graphics
+     * @param bombs 炸弹对象容器
+     * @param panel 被画的那个面板
+     */
+    public void drawBomb(Graphics g, Vector<Bomb> bombs, JPanel panel) {
+        for (Bomb bomb : bombs) {
+            int l = bomb.getL();
+            if (bomb.getLifeTime() > 24) { // 生命值21-25
+                g.drawImage(TankGameImages.bomb[0], bomb.getX() - l / 2, bomb.getY()
+                        - l / 2, l, l, panel);
+            } else if (bomb.getLifeTime() > 18) { // 生命值16-20
+                g.drawImage(TankGameImages.bomb[1], bomb.getX() - l / 2, bomb.getY()
+                        - l / 2, l, l, panel);
+            } else if (bomb.getLifeTime() > 12) { // 生命值11-15
+                g.drawImage(TankGameImages.bomb[2], bomb.getX() - l / 2, bomb.getY()
+                        - l / 2, l, l, panel);
+            } else if (bomb.getLifeTime() > 6) { // 生命值6-10
+                g.drawImage(TankGameImages.bomb[3], bomb.getX() - l / 2, bomb.getY()
+                        - l / 2, l, l, panel);
+            } else { // 生命值低于6
+                g.drawImage(TankGameImages.bomb[4], bomb.getX() - l / 2, bomb.getY()
+                        - l / 2, l, l, panel);
+            }
+            bomb.lifeDown(); // 生命随时间衰减
+            if (bomb.getLifeTime() == 0) { // 该炸弹死亡
+                bomb.setLive(false);
+            }
+        }
+    }
 }
