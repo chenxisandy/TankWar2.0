@@ -113,4 +113,46 @@ public class PaintService {
             }
         }
     }
+
+    /**
+     * 画出敌人坦克和子弹
+     *
+     * @param g       Graphics
+     * @param enemies 敌人坦克容量
+     * @param panel   被画的面板
+     */
+    public void drawEnemyTank(Graphics g, Vector<EnemyTank> enemies, JPanel panel) {
+        for (EnemyTank enemy : enemies) {
+            this.drawStuff(g, enemy, panel); // 画出敌人的坦克
+            //然后画出子弹
+            for (int j = 0; j < enemy.getBullets().size(); j++) {
+                if (enemy.getBullets().get(j) != null) {
+                    Bullet eb = enemy.getBullets().get(j);
+                    g.drawImage(TankGameImages.bullet, eb.getX() - 2,
+                            eb.getY() - 2, 4, 4, panel);
+                }
+            }
+        }
+    }
+
+    /**
+     * 画出我的坦克和子弹
+     *
+     * @param g       Graphics
+     * @param myTanks 我的坦克容量
+     * @param panel   被画的那个面板
+     */
+    public void drawMyTank(Graphics g, Vector<MyTank> myTanks, JPanel panel) {
+        // 取出我的坦克
+        for (MyTank myTank : myTanks) {
+            this.drawStuff(g, myTank, panel); // 画出我的坦克
+            for (int i = 0; i < myTank.getBullets().size(); i++) {
+                if (myTank.getBullets().get(i) != null) {
+                    Bullet b = myTank.getBullets().get(i);
+                    g.drawImage(TankGameImages.bullet, b.getX() - 2,
+                            b.getY() - 2, 4, 4, panel);
+                }
+            }
+        }
+    }
 }
