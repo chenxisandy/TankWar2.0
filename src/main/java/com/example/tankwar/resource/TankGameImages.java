@@ -25,7 +25,9 @@ public class TankGameImages {
     public static Image[] stuffImg = {
             Toolkit.getDefaultToolkit().getImage(TankGameImages.class.getResource("/static/img/brick.gif")),
             Toolkit.getDefaultToolkit().getImage(TankGameImages.class.getResource("/static/img/iron.gif")),
-            Toolkit.getDefaultToolkit().getImage(TankGameImages.class.getResource("/static/img/water.gif"))};
+            Toolkit.getDefaultToolkit().getImage(TankGameImages.class.getResource("/static/img/water.gif")),
+            Toolkit.getDefaultToolkit().getImage(TankGameImages.class.getResource("/static/img/jidi.png"))
+    };
 
     public static Image startImage = Toolkit.getDefaultToolkit()
             .getImage(TankGameImages.class.getResource("/static/img/gamestart.jpg"));

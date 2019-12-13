@@ -65,6 +65,8 @@ public class RealTimeGameData {
 
     private int kx = 0;
 
+    private boolean heatHome = false;
+
     //方向检测
     public void keyPressedDirect(Boolean up, Boolean down, Boolean left, Boolean right) {
         this.up = up;
@@ -234,26 +236,26 @@ public class RealTimeGameData {
         this.map = map;
     }
 
-//    @Override
-//    public String toString() {
-//        return "RealTimeGameData{" +
-//                ", enemyTankNum=" + enemyTankNum +
-//                ", myTankNum=" + myTankNum +
-//                ", beKilled=" + beKilled +
-//                ", myBulletNum=" + myBulletNum +
-//                ", isStart=" + isStart +
-//                ", isStop=" + isStop +
-//                ", up=" + up +
-//                ", down=" + down +
-//                ", left=" + left +
-//                ", right=" + right +
-//                ", level=" + level +
-//                ", iconSmile=" + iconSmile +
-//                ", dy=" + dy +
-//                ", ky=" + ky +
-//                ", kx=" + kx +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "RealTimeGameData{" +
+                ", enemyTankNum=" + enemyTankNum +
+                ", myTankNum=" + myTankNum +
+                ", beKilled=" + beKilled +
+                ", myBulletNum=" + myBulletNum +
+                ", isStart=" + isStart +
+                ", isStop=" + isStop +
+                ", up=" + up +
+                ", down=" + down +
+                ", left=" + left +
+                ", right=" + right +
+                ", level=" + level +
+                ", iconSmile=" + iconSmile +
+                ", dy=" + dy +
+                ", ky=" + ky +
+                ", kx=" + kx +
+                '}';
+    }
 
     public StuffTypeEnum getCurrentStuff() {
         return currentStuff;
@@ -269,5 +271,13 @@ public class RealTimeGameData {
 
     public void setMapMakingFlag(Boolean mapMakingFlag) {
         this.mapMakingFlag = mapMakingFlag;
+    }
+
+    public boolean isHeatHome() {
+        return heatHome;
+    }
+
+    public void setHeatHome(boolean heatHome) {
+        this.heatHome = heatHome;
     }
 }

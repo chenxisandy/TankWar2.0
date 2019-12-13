@@ -14,7 +14,6 @@ public class Map1 extends Map {
      * 构造方法
      */
     public Map1() {
-        // TODO Auto-generated constructor stub
         Vector<Brick> bricks = this.getBricks();
         Vector<Iron> irons = this.getIrons();
         Vector<Water> waters = this.getWaters();

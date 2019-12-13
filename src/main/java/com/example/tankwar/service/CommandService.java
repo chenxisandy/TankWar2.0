@@ -145,7 +145,7 @@ public class CommandService {
     public void help() {
         JOptionPane.showMessageDialog(
                 null,
-                "坦克移动:---方向键---\n坦克开炮:------J键------\n每关只要打掉敌人8辆坦克即可过关，\n第五关有5辆坦克同时在地图上",
+                "坦克移动:方向键\n坦克开炮:J键\n每关只要打掉敌人8辆坦克即可过关，\n",
                 "游戏帮助", JOptionPane.INFORMATION_MESSAGE);
     }
 
@@ -156,30 +156,30 @@ public class CommandService {
     }
 
     public void createMap() {
-//        RealTimeGameData gameData = gameContext.getRealTimeGameData();
-//        gameData.setMapMakingFlag(Boolean.TRUE);
-//        gameData.getEnemies().forEach(t -> t.setLive(Boolean.FALSE));
-//        gameData.getMyTanks().forEach(t -> t.setLive(Boolean.FALSE));
-//        gameData.getMyTanks().clear();
-//        gameData.getEnemies().clear();
-//        gameData.setMap(new Map());
-//        gameData.setStart(Boolean.TRUE);
-        JOptionPane.showMessageDialog(null,
-                "该功能有缺陷故舍弃\n", "创建地图",
-                JOptionPane.INFORMATION_MESSAGE);
+        RealTimeGameData gameData = gameContext.getRealTimeGameData();
+        gameData.setMapMakingFlag(Boolean.TRUE);
+        gameData.getEnemies().forEach(t -> t.setLive(Boolean.FALSE));
+        gameData.getMyTanks().forEach(t -> t.setLive(Boolean.FALSE));
+        gameData.getMyTanks().clear();
+        gameData.getEnemies().clear();
+        gameData.setMap(new Map());
+        gameData.setStart(Boolean.TRUE);
+//        JOptionPane.showMessageDialog(null,
+//                "该功能有缺陷故舍弃\n", "创建地图",
+//                JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void saveMap() {
-//        RealTimeGameData gameData = gameContext.getRealTimeGameData();
-//        String inputValue = JOptionPane.showInputDialog("请输入自定义地图名称");
-//        System.out.println(inputValue);
-//        try {
-//            MapParser.generateXmlFromMap(gameData.getMap(), inputValue);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-        JOptionPane.showMessageDialog(null,
-                "该功能有缺陷故舍弃\n", "保存地图",
-                JOptionPane.INFORMATION_MESSAGE);
+        RealTimeGameData gameData = gameContext.getRealTimeGameData();
+        String inputValue = JOptionPane.showInputDialog("请输入自定义地图名称");
+        System.out.println(inputValue);
+        try {
+            MapParser.generateXmlFromMap(gameData.getMap(), inputValue);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        JOptionPane.showMessageDialog(null,
+//                "该功能有缺陷故舍弃\n", "保存地图",
+//                JOptionPane.INFORMATION_MESSAGE);
     }
 }

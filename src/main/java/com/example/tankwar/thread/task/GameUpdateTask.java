@@ -32,13 +32,17 @@ public class GameUpdateTask implements Runnable {
         while (true) {
             GameTimeUnit.sleepMillis(30);
             if (gameData.isStart()) {
-                if ((gameData.getMyTankNum() == 0 || gameData.getEnemyTankNum() == 0)
+                if ((gameData.getMyTankNum() == 0 || gameData.getEnemyTankNum() == 0 || gameData.isHeatHome())
                         && gameData.getDy() > 250) {
                     gameData.setDy(gameData.getDy() - 2);
                 }
                 if (gameData.getDy() == 250) {
                     panel.repaint();
                     GameTimeUnit.sleepMillis(4000);
+                    if (gameData.isHeatHome()) {
+                        gameData.setHeatHome(false);
+                        break;
+                    }
                     if (gameData.getLevel() == 5) {
                         gameData.setLevel(0);
                     }
