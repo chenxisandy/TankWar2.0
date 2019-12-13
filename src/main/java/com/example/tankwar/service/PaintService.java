@@ -155,4 +155,27 @@ public class PaintService {
             }
         }
     }
+
+    /**
+     * 画出地图
+     *
+     * @param g     Graphics
+     * @param map   地图对象
+     * @param panel 被画的那个面板
+     */
+    public void drawMap(Graphics g, Map map, JPanel panel) {
+        Vector<Brick> bricks = map.getBricks();
+        Vector<Iron> irons = map.getIrons();
+        Vector<Water> waters = map.getWaters();
+        for (int i = 0; i < bricks.size(); i++) {
+            this.drawStuff(g, bricks.get(i), panel);
+        }
+        for (int i = 0; i < irons.size(); i++) {
+            this.drawStuff(g, irons.get(i), panel);
+        }
+        for (int i = 0; i < waters.size(); i++) {
+            this.drawStuff(g, waters.get(i), panel);
+        }
+        g.drawImage(TankGameImages.stuffImg[3], 300 - 20, 600, panel);
+    }
 }
