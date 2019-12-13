@@ -1,5 +1,4 @@
 
-
 package com.example.tankwar.dto;
 
 import com.example.tankwar.entity.Bomb;
@@ -281,3 +280,4 @@ public class RealTimeGameData {
         this.heatHome = heatHome;
     }
 }
+
