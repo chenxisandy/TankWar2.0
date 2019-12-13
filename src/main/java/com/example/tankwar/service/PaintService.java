@@ -178,4 +178,126 @@ public class PaintService {
         }
         g.drawImage(TankGameImages.stuffImg[3], 300 - 20, 600, panel);
     }
+
+    /**
+     * 画出一个面朝北的坦克
+     *
+     * @param g     Graphics
+     * @param tank  东西对象
+     * @param panel 被画的那个面板
+     */
+    public void drawNorth(Graphics g, Tank tank, JPanel panel) {
+
+        Image image;
+        if (tank.getTankType() == TankTypeEnum.MY) {
+            g.setColor(Color.green);
+            image = TankGameImages.myTankImg[DirectionEnum.NORTH.getKey()];// 初始化图片
+        } else {
+            image = TankGameImages.enemyTankImg[DirectionEnum.NORTH.getKey()];
+            g.setColor(Color.gray);
+        }
+        g.drawImage(image, tank.getX() - 20, tank.getY() - 20, 40, 40, panel);
+        //血条
+        g.fillRect(tank.getX() - 20, tank.getY() - 30, tank.getBlood() * (tank instanceof MyTank ? 4 : 20), 5);
+    }
+
+    /**
+     * 画出一个方向朝南的坦克
+     *
+     * @param g     Graphics
+     * @param tank  东西对象
+     * @param panel 被画的那个面板
+     */
+    public void drawSouth(Graphics g, Tank tank, JPanel panel) {
+
+        Image image;
+        if (tank.getTankType() == TankTypeEnum.MY) {
+            g.setColor(Color.green);
+            image = TankGameImages.myTankImg[DirectionEnum.SOUTH.getKey()];// 初始化图片
+        } else {
+            image = TankGameImages.enemyTankImg[DirectionEnum.SOUTH.getKey()];
+            g.setColor(Color.gray);
+        }
+        g.drawImage(image, tank.getX() - 20, tank.getY() - 20, 40, 40, panel);
+        g.fillRect(tank.getX() - 20, tank.getY() - 30, tank.getBlood() * (tank instanceof MyTank ? 4 : 20), 5);
+    }
+
+    /**
+     * 画出一个方向朝西的坦克
+     *
+     * @param g     Graphics
+     * @param tank  东西对象
+     * @param panel 被画的那个面板
+     */
+    public void drawWest(Graphics g, Tank tank, JPanel panel) {
+        Image image;
+        if (tank.getTankType() == TankTypeEnum.MY) {
+            image = TankGameImages.myTankImg[DirectionEnum.WEST.getKey()];// 初始化图片
+            g.setColor(Color.green);
+        } else {
+            image = TankGameImages.enemyTankImg[DirectionEnum.WEST.getKey()];
+            g.setColor(Color.gray);
+        }
+        g.drawImage(image, tank.getX() - 20, tank.getY() - 20, 40, 40, panel);
+        g.fillRect(tank.getX() - 20, tank.getY() - 30, tank.getBlood() * (tank instanceof MyTank ? 4 : 20), 5);
+    }
+
+    /**
+     * 画出一个方向朝东的坦克
+     *
+     * @param g     Graphics
+     * @param tank  东西对象
+     * @param panel 被画的那个面板
+     */
+    public void drawEast(Graphics g, Tank tank, JPanel panel) {
+        Image image;
+        if (tank.getTankType() == TankTypeEnum.MY) {
+            image = TankGameImages.myTankImg[DirectionEnum.EAST.getKey()];// 初始化图片
+            g.setColor(Color.green);
+        } else {
+            image = TankGameImages.enemyTankImg[DirectionEnum.EAST.getKey()];
+            g.setColor(Color.gray);
+        }
+        g.drawImage(image, tank.getX() - 20, tank.getY() - 20, 40, 40, panel);
+        g.fillRect(tank.getX() - 20, tank.getY() - 30, tank.getBlood() * (tank instanceof MyTank ? 4 : 20), 5);
+    }
+
+    /**
+     * 画出游戏右边的那个面板
+     *
+     * @param g   Graphics
+     * @param tgp 游戏主要面板对象
+     */
+    public void drawRight(Graphics g, GamePanel tgp, RealTimeGameData data) {
+        if (data.getMapMakingFlag().equals(Boolean.TRUE)) {
+            //此功能目前已经放弃
+            g.drawString("当前选中画笔（可按C键切换）", 620, 20);
+            if (data.getCurrentStuff() == StuffTypeEnum.IRON) {
+                drawStuff(g, rightIron, tgp);
+            } else if (data.getCurrentStuff() == StuffTypeEnum.BRICK) {
+                drawStuff(g, rightBrick, tgp);
+            } else if (data.getCurrentStuff() == StuffTypeEnum.WATER) {
+                drawStuff(g, rightWater, tgp);
+            } else {
+                g.drawString("橡皮擦", 680, 50);
+            }
+
+        } else {
+            for (int i = 0; i < data.getEnemyTankNum(); i++) {
+                if (i >= 4) {
+                    g.drawImage(TankGameImages.enemyTankImg[DirectionEnum.NORTH.getKey()],
+                            402 + 50 * i, 100, 40, 40, tgp);
+                } else {
+                    g.drawImage(TankGameImages.enemyTankImg[DirectionEnum.NORTH.getKey()],
+                            602 + 50 * i, 20, 40, 40, tgp);
+                }
+            }
+            for (int j = 0; j < data.getMyTankNum(); j++) {
+                g.drawImage(TankGameImages.myTankImg[DirectionEnum.NORTH.getKey()], 602 + 50 * j,
+                        400, 40, 40, tgp);
+            }
+            g.drawString("我的坦克子弹数目:" + data.getMyBulletNum(), 620, 500);
+        }
+
+    }
 }
