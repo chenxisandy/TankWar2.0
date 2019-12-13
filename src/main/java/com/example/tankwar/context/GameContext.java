@@ -61,6 +61,7 @@ public class GameContext {
     @Autowired
     private TaskExecutor threadTaskExecutor;
 
+    //初始的入口
     @EventListener
     public void init(ApplicationReadyEvent applicationStartedEvent) {
         LogUtils.info("Application Started... applicationStartedEvent={}", applicationStartedEvent);
@@ -125,13 +126,14 @@ public class GameContext {
 
 
     public void startGame() {
-        realTimeGameData.setStart(Boolean.TRUE);
-        realTimeGameData.getEnemies().forEach(t -> t.setActivate(Boolean.TRUE));
-        realTimeGameData.getMyTanks().forEach(t -> t.setActivate(Boolean.TRUE));
+        realTimeGameData.setStart(true);
+        realTimeGameData.getEnemies().forEach(t -> t.setActivate(true));
+        realTimeGameData.getMyTanks().forEach(t -> t.setActivate(true));
     }
 
     public void startLevel(int level) {
         reset(level);
+        taskExecutor.execute(new GameUpdateTask(this));
         this.startGame();
     }
 

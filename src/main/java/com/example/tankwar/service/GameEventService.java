@@ -52,6 +52,11 @@ public class GameEventService {
                 Math.abs(bullet1.getY() - bullet2.getY()) <= bullet1.getHeight());
     }
 
+    private boolean isHitting(Bullet bullet, int x, int y) {
+        return (Math.abs(bullet.getX() - x) <= (40 + bullet.getWidth()) / 2 &&
+                Math.abs(bullet.getY() - y) <= (40 + bullet.getHeight()) / 2);
+    }
+
 
     public void refreshState() {
         RealTimeGameData resource = context.getRealTimeGameData();
@@ -126,6 +131,11 @@ public class GameEventService {
 
                         map.getIrons().stream().filter(iron -> isHitting(mb, iron))
                                 .forEach(iron -> afterShotStuff(mb, iron, bombs, myTank));
+                        // TODO: 2019/12/14 to add hit symbol
+                        if (isHitting(mb, 280, 600)) {
+                            resource.setHeatHome(true);
+                        }
+
                     });
 
 

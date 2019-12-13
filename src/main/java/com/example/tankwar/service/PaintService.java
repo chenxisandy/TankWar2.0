@@ -176,6 +176,7 @@ public class PaintService {
         for (int i = 0; i < waters.size(); i++) {
             this.drawStuff(g, waters.get(i), panel);
         }
+        g.drawImage(TankGameImages.stuffImg[3], 300 - 20, 600, panel);
     }
 
     /**
@@ -196,7 +197,8 @@ public class PaintService {
             g.setColor(Color.gray);
         }
         g.drawImage(image, tank.getX() - 20, tank.getY() - 20, 40, 40, panel);
-        g.fillRect(tank.getX() - 20, tank.getY() - 30, tank.getBlood() * 4, 5);
+        //血条
+        g.fillRect(tank.getX() - 20, tank.getY() - 30, tank.getBlood() * (tank instanceof MyTank ? 4 : 20), 5);
     }
 
     /**
@@ -217,7 +219,7 @@ public class PaintService {
             g.setColor(Color.gray);
         }
         g.drawImage(image, tank.getX() - 20, tank.getY() - 20, 40, 40, panel);
-        g.fillRect(tank.getX() - 20, tank.getY() - 30, tank.getBlood() * 4, 5);
+        g.fillRect(tank.getX() - 20, tank.getY() - 30, tank.getBlood() * (tank instanceof MyTank ? 4 : 20), 5);
     }
 
     /**
@@ -237,7 +239,7 @@ public class PaintService {
             g.setColor(Color.gray);
         }
         g.drawImage(image, tank.getX() - 20, tank.getY() - 20, 40, 40, panel);
-        g.fillRect(tank.getX() - 20, tank.getY() - 30, tank.getBlood() * 4, 5);
+        g.fillRect(tank.getX() - 20, tank.getY() - 30, tank.getBlood() * (tank instanceof MyTank ? 4 : 20), 5);
     }
 
     /**
@@ -257,7 +259,7 @@ public class PaintService {
             g.setColor(Color.gray);
         }
         g.drawImage(image, tank.getX() - 20, tank.getY() - 20, 40, 40, panel);
-        g.fillRect(tank.getX() - 20, tank.getY() - 30, tank.getBlood() * 4, 5);
+        g.fillRect(tank.getX() - 20, tank.getY() - 30, tank.getBlood() * (tank instanceof MyTank ? 4 : 20), 5);
     }
 
     /**
@@ -314,7 +316,7 @@ public class PaintService {
             this.drawBomb(g, data.getBombs(), panel); // 画出爆炸
             this.drawRight(g, panel, data);
 
-            if (data.getMyTankNum() == 0) { // 如果我的坦克数量为0
+            if (data.getMyTankNum() == 0 || data.isHeatHome()) { // 如果我的坦克数量为0
                 g.drawImage(TankGameImages.gameOver, 250, data.getDy(), 100,
                         100, panel);
             }
@@ -326,8 +328,11 @@ public class PaintService {
             if (data.getDy() == 250) {
                 g.fillRect(0, 0, 800, 600);
                 g.setColor(Color.BLUE);
-                if (data.getMyTankNum() == 0) {
+                if (data.getMyTankNum() == 0 || data.isHeatHome()) {
                     g.drawString("失败了！！！", 300, 220);
+//                    if (data.isHeatHome()) {
+//                        data.setStart(false);
+//                    }
                 } else {
                     g.drawString("挑战成功，请稍等...", 300, 220);
                 }
