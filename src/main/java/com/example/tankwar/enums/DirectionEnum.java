@@ -1,5 +1,4 @@
 
-
 package com.example.tankwar.enums;
 
 
@@ -34,3 +33,4 @@ public enum DirectionEnum {
         return name;
     }
 }
+

@@ -1,5 +1,3 @@
-
-
 package com.example.tankwar.listener;
 
 import com.example.tankwar.context.GameContext;
