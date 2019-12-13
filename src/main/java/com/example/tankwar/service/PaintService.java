@@ -300,4 +300,70 @@ public class PaintService {
         }
 
     }
+
+    //最终进行统一调用
+    public void rePaintPanel(GamePanel panel, Graphics g) {
+
+        RealTimeGameData data = context.getRealTimeGameData();
+        if (data.isStart()) {
+            g.setColor(Color.black);
+            g.fillRect(0, 0, GameConstants.GAME_PANEL_WIDTH, GameConstants.GAME_PANEL_HEIGHT);
+            g.fillRect(280, 600, 40, 40);
+            this.drawMap(g, data.getMap(), panel);
+            this.drawMyTank(g, data.getMyTanks(), panel); // 画出我的坦克（包括子弹）
+            this.drawEnemyTank(g, data.getEnemies(), panel); // 画出敌人坦克（包括子弹）
+            this.drawBomb(g, data.getBombs(), panel); // 画出爆炸
+            this.drawRight(g, panel, data);
+
+            if (data.getMyTankNum() == 0 || data.isHeatHome()) { // 如果我的坦克数量为0
+                g.drawImage(TankGameImages.gameOver, 250, data.getDy(), 100,
+                        100, panel);
+            }
+
+            if (data.getEnemyTankNum() == 0) { // 如果敌人坦克的数量为0
+                g.drawImage(TankGameImages.gameWin, 250, data.getDy(), 100,
+                        100, panel);
+            }
+            if (data.getDy() == 250) {
+                g.fillRect(0, 0, 800, 600);
+                g.setColor(Color.BLUE);
+                if (data.getMyTankNum() == 0 || data.isHeatHome()) {
+                    g.drawString("失败了！！！", 300, 220);
+//                    if (data.isHeatHome()) {
+//                        data.setStart(false);
+//                    }
+                } else {
+                    g.drawString("挑战成功，请稍等...", 300, 220);
+                }
+                g.drawString(
+                        ("敌人坦克死亡数量:" + (8 - data.getEnemyTankNum())),
+                        300, 260);
+                g.drawString("我的坦克死亡总数量:" + data.getBeKilled(), 300,
+                        280);
+                g.drawString(
+                        "我的炮弹消耗总数量:"
+                                + (GameConstants.MY_TANK_INIT_BULLET_NUM - data
+                                .getMyBulletNum()), 300, 300);
+                g.drawString("敌人坦克剩余数量:" + data.getEnemyTankNum(), 300,
+                        320);
+                g.drawString("我的坦克剩余总数量:" + data.getMyTankNum(), 300,
+                        340);
+                g.drawString("我的炮弹剩余总数量:" + data.getMyBulletNum(), 300,
+                        360);
+            }
+        } else {
+            g.drawImage(TankGameImages.startImage, 0, 0, 800, 700, panel);
+//            g.drawImage(TankGameImages.font, 0, data.getKy(), panel);
+            //制作笑的动态效果
+            if (data.isIconSmile()) {
+                g.drawImage(TankGameImages.yctSmile1, data.getKx(), 45,
+                        panel);
+                data.setIconSmile(false);
+            } else {
+                g.drawImage(TankGameImages.yctSmile2, data.getKx(), 45,
+                        panel);
+                data.setIconSmile(true);
+            }
+        }
+    }
 }
