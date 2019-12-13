@@ -31,5 +31,54 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PaintService {
-    
+    @Autowired
+    private GameContext context;
+    private Brick rightBrick = new Brick(700, 50);
+    private Iron rightIron = new Iron(700, 50);
+    private Water rightWater = new Water(700, 50);
+
+    /**
+     * 画出东西（包括坦克、障碍物。。）
+     *
+     * @param g     Graphics
+     * @param stuff 东西对象
+     * @param panel 被画的那个面板
+     */
+    public void drawStuff(Graphics g, Stuff stuff, JPanel panel) {
+        switch (stuff.getType()) {
+            //枚举的switch，有意思，不需要+StuffTypeEnum.TANK
+            case TANK:
+                Tank tank = (Tank) stuff;
+                switch (stuff.getDirect()) { // 判断所朝的方向
+                    case NORTH:
+                        this.drawNorth(g, tank, panel);
+                        break;
+                    case SOUTH:
+                        this.drawSouth(g, tank, panel);
+                        break;
+                    case WEST:
+                        this.drawWest(g, tank, panel);
+                        break;
+                    case EAST:
+                        this.drawEast(g, tank, panel);
+                        break;
+                }
+                break;
+            case BRICK:
+                //通过key值得到图片
+                g.drawImage(TankGameImages.stuffImg[StuffTypeEnum.BRICK.getKey()],
+                        stuff.getX() - 10, stuff.getY() - 10, 20, 20, panel);
+                break;
+            case IRON:
+                g.drawImage(TankGameImages.stuffImg[StuffTypeEnum.IRON.getKey()], stuff.getX() - 10,
+                        stuff.getY() - 10, 20, 20, panel);
+                break;
+            case WATER:
+                g.drawImage(TankGameImages.stuffImg[StuffTypeEnum.WATER.getKey()],
+                        stuff.getX() - 10, stuff.getY() - 10, 20, 20, panel);
+                break;
+        }
+
+    }
+
 }
